@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你知道v-model的原理吗？说说看</title>
+</head>
+<body>
+  <div id="app">
+    <label for="input1">{{input1Msg}}</label>
+    <input type="text" id="input1" v-model="input1Msg">
+    <br>
+    <label for="input2">{{input2Msg}}</label>
+    <input type="text" id="input2" @input="inputChange" :value="input2Msg">
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  let app = new Vue({
+    el: '#app',
+    data: {
+      input1Msg: null,
+      input2Msg: null
+    },
+    methods: {
+      inputChange(e){
+        this.input2Msg = e.target.value
+      }
+    }
+  })
+</script>
+</html>
