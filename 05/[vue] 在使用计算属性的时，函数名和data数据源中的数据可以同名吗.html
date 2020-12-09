@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在使用计算属性的时，函数名和data数据源中的数据可以同名吗</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{msg}}</h1>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  window.onload = function () {
+    let app = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+
+      // [Vue warn]: The computed property "msg" is already defined in data
+      // 初始化顺序 Props、methods、data、computed、watch都是在initState函数中被初始化的
+      computed: {
+        msg() {
+          return 'world'
+        }
+      }
+    })
+  }
+</script>
+
+</html>
