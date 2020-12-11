@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>怎么给vue定义全局的方法</title>
+</head>
+
+<body>
+  <div id="app" @click="greetVue">Vue</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  window.onload = function () {
+
+    // 通过插件
+    // Vue.use(plugin)
+
+    let mixin = {
+      data() {
+        return {
+          name: 'mixin',
+        }
+      },
+      mounted() {
+        console.log('mixinMounted');
+      },
+      methods: {
+        speak() {
+          console.log('this is mixin');
+        }
+      }
+    }
+
+    // 利用全局混入mixin，因为mixin里面的methods会和创建的每个单文件组件合并
+    // 这样做的优点是调用这个方法的时候有提示
+    Vue.mixin(mixin)
+
+    // 挂载到Vue的prototype上
+    // 缺点是调用这个方法的时候没有提示
+    Vue.prototype.greet = function () {
+      console.log('hello');
+    }
+
+    let app = new Vue({
+      el: '#app',
+      methods: {
+        greetVue() {
+          this.greet()
+          this.speak()
+
+          // 在任意vue文件中写全局函数
+          // 创建全局方法
+          this.$root.$on('vueRoot', () => {
+            console.log('vueRoot');
+          })
+
+          // 调用全局方法
+          this.$root.$emit('vueRoot')
+
+          // 销毁全局方法
+          this.$root.$off('vueRoot')
+        }
+      }
+    })
+    
+
+
+  }
+</script>
+
+</html>
