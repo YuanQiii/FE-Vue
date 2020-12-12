@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue2.0不再支持v-html中使用过滤器了怎么办</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <h1 v-html="htmlFilter"></h1> -->
+    <h1 v-html="$options.filters.htmlFilter(html)"></h1>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  window.onload = function () {
+    
+    // 全局方法(推荐)
+    // Vue.prototype.htmlFilter = function(htmlString){
+    //   return htmlString + 'htmlFilter'
+    // }
+
+    let app = new Vue({
+      el: '#app',
+      data: {
+        html: '<div>div</div>'
+      },
+
+      // $options.filters
+      filters: {
+        htmlFilter(html){
+          return html + 'htmlFilter'
+        }
+      }
+
+      // computed
+      // computed: {
+      //   htmlFilter(){
+      //     return this.html + 'htmlFilter'
+      //   }
+      // }
+    })
+  }
+</script>
+
+</html>
