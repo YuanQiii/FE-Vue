@@ -1,0 +1,5 @@
+# 你知道什么是脚手架吗
+
+- vue项目一般是使用webpack进行打包构建的，然而如果每一个项目都需要我们去配置loader和plugin的话，是很重复的劳动
+- 并且vue项目需要使用到的最基本的webpack loader和webpack plugin是相同的
+- 因此官方推出了vue-cli这个脚手架，使用它就可以快速的生成一份通用的webpack配置，并且帮我们安装好很多必定会用到的npm包
