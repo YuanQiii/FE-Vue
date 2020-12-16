@@ -1,0 +1,3 @@
+# vuex怎么知道state是通过mutation修改还是外部直接修改的
+
+- 通过$watch监听mutation的commit函数中_committing是否为true
